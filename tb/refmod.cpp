@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <math.h>
-
 extern "C" int my_alu(int a, int b, int op){
 	switch(op){
 		case 0:
