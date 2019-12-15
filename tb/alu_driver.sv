@@ -1,12 +1,15 @@
 typedef virtual alu_if alu_vif;
 
 class alu_driver extends uvm_driver #(alu_transaction);
+
+    // Macro
     `uvm_component_utils(alu_driver)
+    
     alu_vif vif;
     event begin_record, end_record;
     alu_transaction alu_tr;
 
-// ------------------------------ Macro --------------------------------//
+// --------------------------- Construtor ------------------------------//
     function new(string name = "alu_driver", uvm_component parent = null);
         super.new(name, parent);
     endfunction
@@ -32,8 +35,7 @@ class alu_driver extends uvm_driver #(alu_transaction);
 /**/			virtual task reset_signals();    
 /**/			    wait (vif.rst === 0);
 /**/			    forever begin
-/**/			        vif.valid_ula  <= '0;  
-/**/			        vif.valid_out  <= '0;
+/**/			        vif.valid_ula  <= '0;
 /**/			        @(negedge vif.rst);
 /**/			    end
 /**/			endtask : reset_signals
@@ -46,6 +48,7 @@ class alu_driver extends uvm_driver #(alu_transaction);
 /**/			    forever begin
 /**/			        seq_item_port.get_next_item(alu_tr);
 /**/			        driver_transfer(alu_tr);
+/**/ 					if(vif.valid_in) wait(vif.valid_out);
 /**/			        seq_item_port.item_done();
 /**/			    end
 /**/			endtask : get_and_drive
@@ -56,13 +59,10 @@ class alu_driver extends uvm_driver #(alu_transaction);
 /**/			    @(posedge vif.clk);
 /**/
 /**/					alu_if.valid_ula <= 1;
-/**/					alu_if.valid_out <= 1;
-/**/
 /**/					alu_if.A 		<= alu_tr.A;
-/**/					alu_if.reg_sel	<= alu;
-/**/					alu_if.instru;
-/**/					alu_if.data_out;
-
+/**/					alu_if.reg_sel	<= alu_tr.reg_sel;
+/**/					alu_if.instru	<= alu_tr.instru;
+/**/
 /**/			endtask : driver_transfer
 
 endclass

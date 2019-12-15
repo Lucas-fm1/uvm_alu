@@ -10,8 +10,8 @@ class reg_transaction extends uvm_sequence_item;
 
   //Macros
   `uvm_object_param_utils_begin(reg_transaction)
-    `uvm_field_int(data_in, UVM_UNSIGNED)
-    `uvm_field_int(addr, UVM_UNSIGNED)
+  `uvm_field_int(data_in, UVM_UNSIGNED)
+  `uvm_field_int(addr, UVM_UNSIGNED)
   `uvm_object_utils_end
 
   function string convert2string();

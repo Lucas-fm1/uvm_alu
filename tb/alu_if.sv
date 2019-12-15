@@ -7,8 +7,8 @@ interface alu_if
 	logic [15:0]        A;
 	logic [1:0]   reg_sel;
 	logic [1:0]    instru;
-	logic       valid_ula;
 	logic [31:0] data_out;
+	logic       valid_ula;
 	logic       valid_out;
 
 endinterface 

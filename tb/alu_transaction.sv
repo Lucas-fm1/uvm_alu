@@ -7,17 +7,17 @@ class alu_transaction extends uvm_sequence_item;
   //Saídas do DUT
   bit [31:0] data_out;
 
-
+  //Construtor
   function new(string name = "alu_transaction");
     super.new(name);
   endfunction
 
   //Macros
   `uvm_object_param_utils_begin(alu_transaction)
-    `uvm_field_int(A, UVM_UNSIGNED)
-    `uvm_field_int(reg_sel, UVM_UNSIGNED)
-    `uvm_field_int(instr, UVM_UNSIGNED)
-    `uvm_field_int(data_out, UVM_UNSIGNED)
+  `uvm_field_int(A, UVM_UNSIGNED)
+  `uvm_field_int(reg_sel, UVM_UNSIGNED)
+  `uvm_field_int(instr, UVM_UNSIGNED)
+  `uvm_field_int(data_out, UVM_UNSIGNED)
   `uvm_object_utils_end
 
   function string convert2string();

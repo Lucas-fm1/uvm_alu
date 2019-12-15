@@ -1,13 +1,20 @@
 import "DPI-C" context function int my_sqrt(int x);
 
+`uvm_analysis_imp_decl(_alu)
+`uvm_analysis_imp_decl(_reg)
+
 class refmod extends uvm_component;
     `uvm_component_utils(refmod)
     
-    transaction_in tr_in;
-    transaction_out tr_out;
+    // TRANSAÇÕES
+    alu_transaction alu_tr_in;
+    reg_transaction reg_tr_in;
+    ref_transaction ref_tr_out;
     
-    uvm_analysis_imp #(transaction_in, refmod) in;
-    uvm_analysis_port #(transaction_out) out;
+    // PORTAS
+    uvm_analysis_imp_alu #(alu_transaction, refmod) alu_pin;
+    uvm_analysis_imp_reg #(reg_transaction, refmod) reg_pin;
+    uvm_analysis_port #(ref_transaction) ref_pout;
     
     event begin_refmodtask, begin_record, end_record;
 
